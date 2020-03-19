@@ -11,7 +11,16 @@ rangex = xmax - xmin
 rangey = ymax - ymin
 
 def f(x):
-    return x**2
+    return 2*x**2 + 7*x - 15
+
+def graphFunction():
+    stroke(255,0,0)
+    x = xmin
+    while x <= xmax:
+        fill(0)
+        line(x*xscl, f(x)*yscl, (x+0.1)*xscl, f(x+0.1)*yscl)
+        x += 0.1
+        
 
 def setup():
     global xscl, yscl
@@ -25,9 +34,7 @@ def draw():
     background(255) #white
     translate(width/2,height/2)
     grid(xscl,yscl) # draw the grid
-    fill(-1)
-    for i in range(-10,11,1):
-        ellipse(i*xscl,f(i)*yscl,10,10)
+    graphFunction()
 
 
 def grid(xscl,yscl):
