@@ -20,6 +20,7 @@ def draw():
     fill(255,0,0) #red
     y = r1*sin(t)
     x = r1*cos(t)
+    circleList.insert(0, y)
     ellipse(x,y,r2,r2) 
     
     stroke(0,255,0) #green for the line
@@ -37,5 +38,9 @@ def draw():
     fill(0,255,0) #green for the ellipse
     ellipse(200,y,10,10)
  
+    for i,c in enumerate(circleList):
+        ellipse(200+i,c,5,5)
+        print(200+i,c)
+        
     t += 0.1
   
