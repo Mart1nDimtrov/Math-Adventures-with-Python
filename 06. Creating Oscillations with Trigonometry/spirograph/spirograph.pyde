@@ -6,7 +6,7 @@ x1 = 0
 y1 = 0
 t = 0 #time variable
 points = [] #empty list to put points in
-prop = 0.9
+prop = 0.7
 
 def setup():
     size(600,600)
