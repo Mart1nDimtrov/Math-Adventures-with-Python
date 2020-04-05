@@ -21,7 +21,7 @@ def cMult(u,v):
 def magnitude(z):
   return sqrt(z[0]**2 + z[1]**2)
 
-def mandelbrot(z,num):
+def julia(z,c,num):
     '''runs the process num times
     and returns the diverge count '''
     count=0
@@ -31,7 +31,7 @@ def mandelbrot(z,num):
         # check the magnitude
         if magnitude(z1) > 2.0:
             return count
-        z1 = cAdd(cMult(z1,z1),z)
+        z1 = cAdd(cMult(z1,z1),c)
         count+=1
         
     return num
@@ -45,13 +45,18 @@ def setup():
     yscl = float(rangey)/height
 
 def draw():
+    # [-0.8,0.156]
+    # [-0.4,0.6]
+    # [0.4,0.6]
+    # [0.285,0.01]
+    c = [0.275,0.01]
     #go over all x's and y's on the grid
     for x in range(width):
         for y in range(height):
             z = [(xmin + x * xscl) ,
             (ymin + y * yscl) ]
             #put it into the mandelbrot function
-            col=mandelbrot(z,100)
+            col=julia(z,c,100)
             #if mandelbrot returns 0
             if col == 100:
                 fill(0) #make the rectangle black
