@@ -26,8 +26,27 @@ def multmatrix(a,b):
 		newmatrix.append(row)
 	return newmatrix
 
+def transmute(a):
+	for r in range(len(a)):
+		for c in range(len(a[r])):
+			el = a[r][c] 
+			if c != r and  c % 2 == 1:
+				a[r][c] = a[c][r]
+				a[c][r] = el
+				
+
+	return a
 
 A = [[2,3],[5,-8]]
 B = [[1,-4],[8,-6]]
 
+a = [[1,2,-3,-1]]
+b = [[4,-1],
+[-2,3],
+[6,-3],
+[1,0]]
+
+
 print(addMatrices(A,B))
+print(transmute(A))
+print(multmatrix(a,b))
