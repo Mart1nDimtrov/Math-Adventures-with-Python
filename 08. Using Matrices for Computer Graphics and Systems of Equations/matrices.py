@@ -26,6 +26,24 @@ def multmatrix(a,b):
 		newmatrix.append(row)
 	return newmatrix
 
+
+def multmatrix_2(a,b):
+	#Returns the product of matrix a and matrix b
+	m = len(a) #number of rows in first matrix
+	n = len(b[0]) #number of columns in second matrix
+	newmatrix = []
+	for r in range(m):
+		new_row = []
+		for c in range(n):
+			sum = 0
+			for j in range(len(b)):
+				sum += a[r][j] * b[j][c]
+			new_row.append(sum)
+		newmatrix.append(new_row)
+
+	return newmatrix
+
+
 def transmute(a):
 	for r in range(len(a)):
 		for c in range(len(a[r])):
@@ -50,3 +68,4 @@ b = [[4,-1],
 print(addMatrices(A,B))
 print(transmute(A))
 print(multmatrix(a,b))
+print(multmatrix_2(a,b))
