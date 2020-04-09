@@ -11,6 +11,24 @@ rangex = xmax - xmin
 rangey = ymax - ymin
 
 fmatrix = [[0,0],[1,0],[1,2],[2,2],[2,3],[1,3],[1,4],[3,4],[3,5],[0,5]]
+transformation_matrix = [[0,-1],[1,0]]
+
+def multmatrix(a,b):
+  #Returns the product of matrix a and matrix b
+  m = len(a) #number of rows in first matrix
+  n = len(b[0]) #number of columns in second matrix
+  newmatrix = []
+  for i in range(m):
+    row = []
+    #for every column in b
+    for j in range(n):
+      sum1 = 0
+      #for every element in the column
+      for k in range(len(b)):
+        sum1 += a[i][k]*b[k][j]
+      row.append(sum1)
+    newmatrix.append(row)
+  return newmatrix
 
 def setup():
     global xscl, yscl
@@ -27,7 +45,10 @@ def draw():
     grid(xscl, yscl)
     strokeWeight(2) #thicker line
     stroke(0)#black
+    newmatrix = multmatrix(fmatrix,transformation_matrix)
     graphPoints(fmatrix)
+    stroke(255,0,0) #red resultant matrix
+    graphPoints(newmatrix)
     
 def grid(xscl,yscl):
     '''Draws a grid for graphing'''
