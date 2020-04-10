@@ -55,6 +55,18 @@ def transmute(a):
 
 	return a
 
+def transpose(a):
+	rows = len(a)
+	columns = len(a[0])
+	newmatrix = []
+	for c in range(columns):
+		row = []
+		for r in range(rows):
+			row.append(a[r][c])
+		newmatrix.append(row)
+
+	return newmatrix
+
 A = [[2,3],[5,-8]]
 B = [[1,-4],[8,-6]]
 
@@ -69,3 +81,15 @@ print(addMatrices(A,B))
 print(transmute(A))
 print(multmatrix(a,b))
 print(multmatrix_2(a,b))
+
+fmatrix = [[0,0],[1,0],[1,2],[2,2],[2,3],[1,3],[1,4],[3,4],[3,5],[0,5]]
+print(transpose(fmatrix))
+
+a = [[1,2,-3,-1]]
+print(transpose(a))
+
+b = [[4,-1],
+[-2,3],
+[6,-3],
+[1,0]]
+print(transpose(b))

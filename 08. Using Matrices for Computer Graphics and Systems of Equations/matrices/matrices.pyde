@@ -11,7 +11,25 @@ rangex = xmax - xmin
 rangey = ymax - ymin
 
 fmatrix = [[0,0],[1,0],[1,2],[2,2],[2,3],[1,3],[1,4],[3,4],[3,5],[0,5]]
+
 transformation_matrix = [[0,-1],[1,0]]
+#transformation_matrix = [[1,0],[0,-1]]
+#transformation_matrix = [[0,-1],[-1,0]]
+#transformation_matrix = [[-1,1],[1,1]]
+
+def transpose(a):
+    '''Transposes matrix a'''
+    output = []
+    m = len(a)
+    n = len(a[0])
+    #create an n x m matrix
+    for i in range(n):
+        output.append([])
+        for j in range(m):
+            #replace a[i][j] with a[j][i]
+            output[i].append(a[j][i])
+            
+    return output
 
 def multmatrix(a,b):
   #Returns the product of matrix a and matrix b
@@ -45,7 +63,7 @@ def draw():
     grid(xscl, yscl)
     strokeWeight(2) #thicker line
     stroke(0)#black
-    newmatrix = multmatrix(fmatrix,transformation_matrix)
+    newmatrix = transpose(multmatrix(transformation_matrix,transpose(fmatrix)))
     graphPoints(fmatrix)
     stroke(255,0,0) #red resultant matrix
     graphPoints(newmatrix)
@@ -70,3 +88,5 @@ def graphPoints(matrix):
     for pt in matrix:
         vertex(pt[0]*xscl,pt[1]*yscl)
     endShape(CLOSE)
+    
+    
