@@ -12,7 +12,7 @@ rangey = ymax - ymin
 
 fmatrix = [[0,0],[1,0],[1,2],[2,2],[2,3],[1,3],[1,4],[3,4],[3,5],[0,5]]
 
-transformation_matrix = [[0,-1],[1,0]]
+#transformation_matrix = [[0,-1],[1,0]]
 #transformation_matrix = [[1,0],[0,-1]]
 #transformation_matrix = [[0,-1],[-1,0]]
 #transformation_matrix = [[-1,1],[1,1]]
@@ -63,7 +63,10 @@ def draw():
     grid(xscl, yscl)
     strokeWeight(2) #thicker line
     stroke(0)#black
-    newmatrix = transpose(multmatrix(transformation_matrix,transpose(fmatrix)))
+    # newmatrix = transpose(multmatrix(transformation_matrix,transpose(fmatrix)))
+    ang = map(mouseX,0,width,0,TWO_PI)
+    rot_matrix = [[cos(ang),-sin(ang)],[sin(ang),cos(ang)]]
+    newmatrix = transpose(multmatrix(rot_matrix,transpose(fmatrix)))
     graphPoints(fmatrix)
     stroke(255,0,0) #red resultant matrix
     graphPoints(newmatrix)
