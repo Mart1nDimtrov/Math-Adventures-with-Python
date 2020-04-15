@@ -13,6 +13,7 @@ def gauss(A):
 			divisor = row[j]
 			for i, term in enumerate(row):
 				row[i] = term / divisor
+			print(row)
 		#add the other rows to the additive inverse
 		#for every row
 		for i in range(m):
@@ -24,7 +25,10 @@ def gauss(A):
 					#add the corresponding term in the jth row
 					#multiplied by the additive inverse
 					#to the term in the ith row
+					print(i,ind,j)
+					print(A[i])
 					A[i][ind] += addinv*A[j][ind]
+					print(A[i][ind],addinv,A[j][ind])
 
 	return A
 
@@ -33,3 +37,11 @@ B = [[2,1,-1,8],
 [-3,-1,2,-1],
 [-2,1,2,-3]]
 print(gauss(B))
+
+D = [[2,-1,5,1,-3],[3,2,2,-6,-32],[1,3,3,-1,-47],[5,-2,-3,3,49]]
+print(gauss(D))
+
+#check result
+print((2*2)-(-12)+(5*-4)+1)
+
+
