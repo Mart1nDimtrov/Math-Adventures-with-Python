@@ -1,7 +1,6 @@
 def gauss(A):
 	'''Converts a matrix into the identity
 	matrix by Gaussian elimination, with
-	Using Matrices for computer graphics  171
 	the last column containing the solutions
 	for the variables'''
 	m = len(A)
