@@ -1,22 +1,37 @@
-cwidth = 0
-cheight = 0
-xcor = 0
-ycor = 0
+xcor = 300
+ballList=[] #empty list to put the balls in
+
+class Ball:
+    def __init__(self,x,y):
+        '''How to initialize a Ball'''
+        self.xcor = x
+        self.ycor = y
+        self.xvel = random(-3,3)
+        self.yvel = random(-3,3)
+        self.colors = [random(255) for x in range(3)]
+        self.radius = random(20,35)
+
+    def update(self): 
+        self.xcor += self.xvel
+        self.ycor += self.yvel
+        #if the ball reaches a wall, switch direction.
+        if self.xcor > width or self.xcor < 0:
+            self.xvel = -self.xvel
+        if self.ycor > height or self.ycor < 0:
+            self.yvel = -self.yvel
+        fill(self.colors[0],self.colors[1],self.colors[2])
+        ellipse(self.xcor,self.ycor,self.radius,self.radius)
+        
 
 def setup():
-    global cwidth,cheight,xcor,ycor
     size(600,600)
-    cwidth = width
-    cheight = height
-    xcor = cwidth / 2
-    ycor = cheight / 2
+    for i in range(45):
+        ballList.append(Ball(random(width),
+        random(height)))
     
 def draw():
-    global xcor,ycor,cwidth,cheight
-    background(0) #black background
-    print(xcor,ycor)
-    if cwidth >= xcor + 20:
-        xcor += 1
-    if cheight >= ycor + 20:
-        ycor += 1
-    ellipse(xcor,ycor,20,20)
+    background(0) #black
+    for ball in ballList:
+        ball.update()
+    
+   
