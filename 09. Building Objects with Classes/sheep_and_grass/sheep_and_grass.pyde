@@ -20,13 +20,29 @@ class Sheep:
         self.sz = 10 #size
         self.energy = 20
         self.col = col
+        self.age = 500.00 #give the sheeps a lifespan
         
     def update(self):
         #make sheep walk randomly
-        move = 10 #the maximum it can move in any direction
+        move = 5 #the maximum it can move in any direction
+        self.sz = self.energy*1.00/self.sz
+        #if self.col == PURPLE:
+        #    move = 7
         self.energy -= 1 #walking costs energy
-        if self.energy <= 0:
+        if self.col == PURPLE:
+            self.age -= 0.5
+        else:
+            self.age -= 1
+        self.age -= 1
+        if self.energy <= 0 or self.age <= 0:
             sheeps.remove(self)
+        if self.energy >= 50:
+            if self.col == WHITE:
+                self.energy -= 20
+            else:
+                self.energy -= 30 #giving birth takes energy
+            #add another sheep to the list
+            sheeps.append(Sheep(self.x,self.y,self.col))
         self.x += random(-move, move)
         self.y += random(-move, move)
         #"wrap" the world Asteroids-style
@@ -59,7 +75,10 @@ class Grass:
         
     def update(self):
         if self.eaten:
-            fill(BROWN)
+            if random(100) < 5:
+                self.eaten = False
+            else:
+                fill(BROWN)
         else:
             fill(GREEN)
         rect(self.x,self.y,self.sz,self.sz)
@@ -70,7 +89,7 @@ def setup():
     noStroke()
     size(600,600)
     #create a Sheep object called shawn at (300,200)
-    for s in range(20):
+    for s in range(10):
         rand_col = colorList[int(random(len(colorList)))]
         sheeps.append(Sheep(random(height),random(width),rand_col))
     #creating the grass
