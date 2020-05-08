@@ -1,10 +1,11 @@
-GRID_W = 20
-GRID_H = 20
+GRID_W = 60
+GRID_H = 60
 #size of cell
-SZ = 20
+SZ = 10
+generation = 0
 
 class Cell:
-    def __init__(self,c,r,state=0):
+    def __init__(self,r,c,state=0):
         self.c = c
         self.r = r
         self.state = state
@@ -14,7 +15,7 @@ class Cell:
             fill(0) #black
         else:
             fill(255) #white
-            rect(SZ*self.r,SZ*self.c,SZ,SZ)
+        rect(SZ*self.r,SZ*self.c,SZ,SZ)
             
     def checkNeighbors(self):
         if self.state == 1: return 1 #on Cells stay on
@@ -33,29 +34,48 @@ class Cell:
             
 
 def setup():
-    global cell_list,SZ
-    SZ = width // GRID_W 
-    size(600,600)
-    cell_list = createCellList()
-    
+    global SZ, cell_list
+    size(700,700)
+    SZ = width// GRID_W + 1
+    cell_list = create_cell_list()
     
 def draw():
+    global generation,cell_list
+    frameRate(10)
+    cell_list = update(cell_list)
     for row in cell_list:
         for cell in row:
-            cell.state = cell.checkNeighbors()
             cell.display()
             
-def createCellList():
+    noLoop()
+            
+        
+def update(cell_list):
+    new_list = []
+    for r,row in enumerate(cell_list):
+        new_list.append([])
+        for c,cell in enumerate(row):
+            new_list[r].append(Cell(r,c,cell.checkNeighbors()))
+            
+    return new_list[::]
+
+            
+def create_cell_list():
     '''Creates a big list of off cells with
     one on Cell in the center'''
-    newList=[]#empty list for cells
+    new_list=[]#empty list for cells
     #populate the initial cell list
     for j in range(GRID_H):
-        newList.append([]) #add empty row
+        new_list.append([]) #add empty row
         for i in range(GRID_W):
-            newList [j].append(Cell(i,j,0)) #add off Cells or zeroes
+            new_list[j].append(Cell(i,j,0)) #add off Cells or zeroes
             #center cell is set to on
-    newList [GRID_H//2][GRID_W//2].state = 1
+    new_list[GRID_H//2][GRID_W//2].state = 1
             
-    return newList
+    return new_list
+
+def keyPressed():
+    if keyCode == UP:
+        loop()
+
         
