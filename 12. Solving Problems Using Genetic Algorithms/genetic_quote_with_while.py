@@ -28,18 +28,25 @@ def mutate(my_list):
 
 	return new_list
 
+random.seed()
 my_list = makeList()
 
-for i in range(20000):
-	# mutate the list to make a guess
-	new_list = mutate(my_list)
-	# guess if the mutation is better than the previous one
-	if score(my_list) < score(new_list):
-		# make the previous list the new one
-		my_list = new_list
+result_score = score(my_list)
+list_len = len(target)
+# check how many guesses were made
+num_guess = 0
 
-print(target)
-print(''.join(my_list))
-print(score(my_list))
+# iterate until result score and list_len are the same
+while result_score != list_len:
+	num_guess += 1
+	new_list = mutate(my_list)
+	new_score = score(new_list)
+	# if the score is better turn the old list into the new one
+	if new_score > result_score:
+		my_list = new_list
+		result_score = new_score
+	print("".join(new_list))
+
+print(num_guess)
 
 
